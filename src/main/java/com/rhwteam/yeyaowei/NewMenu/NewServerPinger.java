@@ -62,7 +62,7 @@ public class NewServerPinger
         ServerAddress serveraddress = ServerAddress.func_78860_a(p_147224_1_.serverIP);
         final NetworkManager networkmanager = NetworkManager.provideLanClient(InetAddress.getByName(serveraddress.getIP()), serveraddress.getPort());
         this.field_147229_c.add(networkmanager);
-        p_147224_1_.serverMOTD = "¡ìe¡ìl¼ÓÔØÖÐ...";
+        p_147224_1_.serverMOTD = "Â§eÂ§låŠ è½½ä¸­...";
         p_147224_1_.pingToServer = -1L;
         p_147224_1_.field_147412_i = null;
         networkmanager.setNetHandler(new INetHandlerStatusClient()
@@ -76,11 +76,11 @@ public class NewServerPinger
                 if (serverstatusresponse.func_151317_a() != null)
                 {
                     //p_147224_1_.serverMOTD = serverstatusresponse.func_151317_a().getFormattedText();
-                	p_147224_1_.serverMOTD = "¡ìa¡ìlÔÚÏß";
+                	p_147224_1_.serverMOTD = "Â§aÂ§låœ¨çº¿";
                 }
                 else
                 {
-                    p_147224_1_.serverMOTD = "¡ì4¡ìl¹Ø±Õ";
+                    p_147224_1_.serverMOTD = "Â§4Â§lå…³é—­";
                 }
 
                 if (serverstatusresponse.func_151322_c() != null)
@@ -97,8 +97,8 @@ public class NewServerPinger
                 if (serverstatusresponse.func_151318_b() != null)
                 {
                     p_147224_1_.populationInfo = EnumChatFormatting.GRAY + "" + serverstatusresponse.func_151318_b().func_151333_b() + "" + EnumChatFormatting.DARK_GRAY + "/" + EnumChatFormatting.GRAY + serverstatusresponse.func_151318_b().func_151332_a();
-                    NewMenu.maxplayer = "¡ìa¡ìl" + serverstatusresponse.func_151318_b().func_151332_a();
-                	NewMenu.onlineplayer = "¡ìa¡ìl" + serverstatusresponse.func_151318_b().func_151333_b();
+                    NewMenu.maxplayer = "Â§aÂ§l" + serverstatusresponse.func_151318_b().func_151332_a();
+                	NewMenu.onlineplayer = "Â§aÂ§l" + serverstatusresponse.func_151318_b().func_151333_b();
 
                     if (ArrayUtils.isNotEmpty(serverstatusresponse.func_151318_b().func_151331_c()))
                     {
@@ -134,8 +134,8 @@ public class NewServerPinger
                 else
                 {
                     p_147224_1_.populationInfo = EnumChatFormatting.DARK_GRAY + "???";
-                    NewMenu.maxplayer = "¡ì4¡ìl0";
-                    NewMenu.onlineplayer = "¡ì4¡ìl0";
+                    NewMenu.maxplayer = "Â§4Â§l0";
+                    NewMenu.onlineplayer = "Â§4Â§l0";
                 }
 
                 if (serverstatusresponse.func_151316_d() != null)
@@ -176,10 +176,10 @@ public class NewServerPinger
                 {
                     NewServerPinger.logger.error("Can\'t ping " + p_147224_1_.serverIP + ": " + p_147231_1_.getUnformattedText());
                     //p_147224_1_.serverMOTD = EnumChatFormatting.DARK_RED + "Can\'t connect to server.";
-                    p_147224_1_.serverMOTD = "¡ì4¡ìl¹Ø±Õ";
+                    p_147224_1_.serverMOTD = "Â§4Â§lå…³é—­";
                     p_147224_1_.populationInfo = "";
-                    NewMenu.onlineplayer = "¡ì4¡ìl0";
-                    NewMenu.maxplayer = "¡ì4¡ìl0";
+                    NewMenu.onlineplayer = "Â§4Â§l0";
+                    NewMenu.maxplayer = "Â§4Â§l0";
                     NewServerPinger.this.func_147225_b(p_147224_1_);
                 }
             }

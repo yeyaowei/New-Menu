@@ -153,12 +153,12 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     			catch (UnknownHostException unknownhostexception)
     			{
     				NewMenu.this.server.pingToServer = -1L;
-    				NewMenu.this.server.serverMOTD = "¡ì4¡ìlÍøÂç´íÎó";
+    				NewMenu.this.server.serverMOTD = "Â§4Â§lç½‘ç»œé”™è¯¯";
     			}
     			catch (Exception exception)
     			{
     				NewMenu.this.server.pingToServer = -1L;
-    				NewMenu.this.server.serverMOTD = "¡ì4¡ìlÍøÂç´íÎó";
+    				NewMenu.this.server.serverMOTD = "Â§4Â§lç½‘ç»œé”™è¯¯";
     			}
     		}
     	});
@@ -174,16 +174,16 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     }
 
     /**
-     * µ±GUIĞèÒªÔİÍ£ÓÎÏ·Ê±·µ»Ø true
+     * å½“GUIéœ€è¦æš‚åœæ¸¸æˆæ—¶è¿”å› true
      */
     public boolean doesGuiPauseGame()
     {
-    	//Ö÷½çÃæÔõÃ´¿ÉÄÜÒªÔİÍ£(¡Ñ©n¡Ñ)b
+    	//ä¸»ç•Œé¢æ€ä¹ˆå¯èƒ½è¦æš‚åœ(âŠ™ï¹âŠ™)b
         return false;
     }
 
     /**
-     * ³õÊ¼»¯½çÃæ£¬Ìí¼Ó°´Å¥ÓëÆäËûÒªËØ.
+     * åˆå§‹åŒ–ç•Œé¢ï¼Œæ·»åŠ æŒ‰é’®ä¸å…¶ä»–è¦ç´ .
      */
     public void initGui()
     {
@@ -236,48 +236,48 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     }
 
     /**
-     * Ìí¼Ó°´Å¥£¬¼ì²é¸üĞÂ
+     * æ·»åŠ æŒ‰é’®ï¼Œæ£€æŸ¥æ›´æ–°
      */
     private void addSingleplayerMultiplayerButtons(int p_73969_1_, int p_73969_2_)
     {
     	if (ConfigVar.IsTwoAddress)
     	{
-    		this.buttonList.add(this.btns = new GuiButton(21, this.width / 2 + 2, p_73969_1_, 98, 20,I18n.format("·şÎñÆ÷Èë¿ÚI", new Object[0])));
-    		this.buttonList.add(this.btns1 = new GuiButton(22, this.width / 2 + 2, p_73969_1_ + p_73969_2_ * 1, 98, 20,I18n.format("·şÎñÆ÷Èë¿ÚII", new Object[0])));
-        	this.buttonList.add(new GuiButton(1, this.width / 2 + 2, p_73969_1_ + p_73969_2_ * 2, 98, 20, I18n.format("µ¥ÈËÓÎÏ·", new Object[0])));
+    		this.buttonList.add(this.btns = new GuiButton(21, this.width / 2 + 2, p_73969_1_, 98, 20,I18n.format("æœåŠ¡å™¨å…¥å£I", new Object[0])));
+    		this.buttonList.add(this.btns1 = new GuiButton(22, this.width / 2 + 2, p_73969_1_ + p_73969_2_ * 1, 98, 20,I18n.format("æœåŠ¡å™¨å…¥å£II", new Object[0])));
+        	this.buttonList.add(new GuiButton(1, this.width / 2 + 2, p_73969_1_ + p_73969_2_ * 2, 98, 20, I18n.format("å•äººæ¸¸æˆ", new Object[0])));
         	if (isOutdate())
             {
-                this.newVersionDetected = I18n.format("¡ìe¡ìl¼ì²âµ½ĞÂ°æ±¾ ¡ìb¡ìl" + newVersion, new Object[0]);
-                this.clickChangelog = I18n.format("¡ìa¡ìlµã»÷´Ë´¦²é¿´¸üĞÂ¼ÇÂ¼", new Object[0]);
+                this.newVersionDetected = I18n.format("Â§eÂ§læ£€æµ‹åˆ°æ–°ç‰ˆæœ¬ Â§bÂ§l" + newVersion, new Object[0]);
+                this.clickChangelog = I18n.format("Â§aÂ§lç‚¹å‡»æ­¤å¤„æŸ¥çœ‹æ›´æ–°è®°å½•", new Object[0]);
                 this.btns.enabled = false;
                 this.btns1.enabled = false;
-                this.btns.displayString = "¿Í»§¶Ë°æ±¾¹ıÆÚ";
-                this.btns1.displayString = "¿Í»§¶Ë°æ±¾¹ıÆÚ";
+                this.btns.displayString = "å®¢æˆ·ç«¯ç‰ˆæœ¬è¿‡æœŸ";
+                this.btns1.displayString = "å®¢æˆ·ç«¯ç‰ˆæœ¬è¿‡æœŸ";
             }
         	else if(!getServerStatus())
         	{
                 this.btns.enabled = false;
                 this.btns1.enabled = false;
-                this.btns.displayString = "·şÎñÆ÷Î¬»¤ÖĞ";
-                this.btns1.displayString = "·şÎñÆ÷Î¬»¤ÖĞ";
+                this.btns.displayString = "æœåŠ¡å™¨ç»´æŠ¤ä¸­";
+                this.btns1.displayString = "æœåŠ¡å™¨ç»´æŠ¤ä¸­";
         	}
         	//this.buttonList.add(new GuiButton(6, this.width / 2 + 2, p_73969_1_ + p_73969_2_ * 2, 98, 20, I18n.format("Mods", new Object[0])));
     	}
     	else
     	{
-    		this.buttonList.add(this.btns = new GuiButton(21, this.width / 2 + 2, p_73969_1_, 98, 20,I18n.format("½øÈë·şÎñÆ÷", new Object[0])));
-        	this.buttonList.add(new GuiButton(1, this.width / 2 + 2, p_73969_1_ + p_73969_2_ * 1, 98, 20, I18n.format("µ¥ÈËÓÎÏ·", new Object[0])));
+    		this.buttonList.add(this.btns = new GuiButton(21, this.width / 2 + 2, p_73969_1_, 98, 20,I18n.format("è¿›å…¥æœåŠ¡å™¨", new Object[0])));
+        	this.buttonList.add(new GuiButton(1, this.width / 2 + 2, p_73969_1_ + p_73969_2_ * 1, 98, 20, I18n.format("å•äººæ¸¸æˆ", new Object[0])));
         	if (isOutdate())
             {
-                this.newVersionDetected = I18n.format("¡ìe¡ìl¼ì²âµ½ĞÂ°æ±¾ ¡ìb¡ìl" + newVersion, new Object[0]);
-                this.clickChangelog = I18n.format("¡ìa¡ìlµã»÷´Ë´¦²é¿´¸üĞÂ¼ÇÂ¼", new Object[0]);
+                this.newVersionDetected = I18n.format("Â§eÂ§læ£€æµ‹åˆ°æ–°ç‰ˆæœ¬ Â§bÂ§l" + newVersion, new Object[0]);
+                this.clickChangelog = I18n.format("Â§aÂ§lç‚¹å‡»æ­¤å¤„æŸ¥çœ‹æ›´æ–°è®°å½•", new Object[0]);
                 this.btns.enabled = false;
-                this.btns.displayString = "¿Í»§¶Ë°æ±¾¹ıÆÚ";
+                this.btns.displayString = "å®¢æˆ·ç«¯ç‰ˆæœ¬è¿‡æœŸ";
             }
         	else if(!getServerStatus())
         	{
                 this.btns.enabled = false;
-                this.btns.displayString = "·şÎñÆ÷Î¬»¤ÖĞ";
+                this.btns.displayString = "æœåŠ¡å™¨ç»´æŠ¤ä¸­";
         	}
         	this.buttonList.add(new GuiButton(6, this.width / 2 + 2, p_73969_1_ + p_73969_2_ * 2, 98, 20, I18n.format("Mods", new Object[0])));
     	}
@@ -293,7 +293,7 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     }
 
     /**
-     * Ìí¼ÓÑİÊ¾°´Å¥(Î´Ê¹ÓÃ
+     * æ·»åŠ æ¼”ç¤ºæŒ‰é’®(æœªä½¿ç”¨
      */
     private void addDemoButtons(int p_73972_1_, int p_73972_2_)
     {
@@ -377,12 +377,12 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
                     catch (UnknownHostException var2)
                     {
                     	NewMenu.this.server.pingToServer = -1L;
-                    	NewMenu.this.server.serverMOTD = "¡ì4¡ìlÍøÂç´íÎó";
+                    	NewMenu.this.server.serverMOTD = "Â§4Â§lç½‘ç»œé”™è¯¯";
                     }
                     catch (Exception var3)
                     {
                     	NewMenu.this.server.pingToServer = -1L;
-                    	NewMenu.this.server.serverMOTD = "¡ì4¡ìlÍøÂç´íÎó";
+                    	NewMenu.this.server.serverMOTD = "Â§4Â§lç½‘ç»œé”™è¯¯";
                     }
                 }
             });
@@ -441,7 +441,7 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     }
 
     /**
-     * »æÖÆÓÎÏ·±³¾°È«¾°Í¼
+     * ç»˜åˆ¶æ¸¸æˆèƒŒæ™¯å…¨æ™¯å›¾
      */
     private void drawPanorama(int p_73970_1_, int p_73970_2_, float p_73970_3_)
     {
@@ -530,7 +530,7 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     }
 
     /**
-     * Ê¹skyboxĞı×ªÄ£ºı
+     * ä½¿skyboxæ—‹è½¬æ¨¡ç³Š
      */
     private void rotateAndBlurSkybox(float p_73968_1_)
     {
@@ -564,7 +564,7 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     }
 
     /**
-     * äÖÈ¾skybox
+     * æ¸²æŸ“skybox
      */
     private void renderSkybox(int p_73971_1_, int p_73971_2_, float p_73971_3_)
     {
@@ -598,16 +598,16 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     private void drawAnnouncement() {
 		if (field_148302_b != null) {
 			online = server.serverMOTD;
-			ping = "¡ìa¡ìl" + server.pingToServer;
+			ping = "Â§aÂ§l" + server.pingToServer;
 		} else {
-			ping = "¡ì4¡ìl0";
+			ping = "Â§4Â§l0";
 		}
 	}
     
     public static int Alocation = 0;
     
     /**
-     * »æÖÆÆÁÄ»ÓëËùÓĞÔªËØ.
+     * ç»˜åˆ¶å±å¹•ä¸æ‰€æœ‰å…ƒç´ .
      */
     public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
@@ -664,17 +664,17 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
             }
         }
         //ForgeHooksClient.renderMainMenu(this, fontRendererObj, width, height);
-        String s1 = "¡ìbMojang AB.°æÈ¨ËùÓĞ";
+        String s1 = "Â§bMojang AB.ç‰ˆæƒæ‰€æœ‰";
         this.drawString(this.fontRendererObj, s1, this.width - this.fontRendererObj.getStringWidth(s1) - 2, this.height - 10, -1);
-        this.drawString(this.fontRendererObj, "¡ìe¡ìlUIÖÆ×÷ BakaSea(SPE_HaiKuo)", this.width - this.fontRendererObj.getStringWidth("¡ìe¡ìlUIÖÆ×÷ BakaSea(SPE_HaiKuo)") - 2, this.height - 20, -1);
-        this.drawString(this.fontRendererObj, "¡ìa¡ìlUIĞŞ¸Ä R9 Nano(yeyaowei)", this.width - this.fontRendererObj.getStringWidth("¡ìa¡ìlUIĞŞ¸Ä R9 Nano(yeyaowei)") - 2, this.height - 30, -1);
+        this.drawString(this.fontRendererObj, "Â§eÂ§lUIåˆ¶ä½œ BakaSea(SPE_HaiKuo)", this.width - this.fontRendererObj.getStringWidth("Â§eÂ§lUIåˆ¶ä½œ BakaSea(SPE_HaiKuo)") - 2, this.height - 20, -1);
+        this.drawString(this.fontRendererObj, "Â§aÂ§lUIä¿®æ”¹ R9 Nano(yeyaowei)", this.width - this.fontRendererObj.getStringWidth("Â§aÂ§lUIä¿®æ”¹ R9 Nano(yeyaowei)") - 2, this.height - 30, -1);
         if(ConfigVar.debug)
         {
-        	this.drawString(this.fontRendererObj, "¡ìcDEBUG Ä£Ê½", this.width - this.fontRendererObj.getStringWidth("¡ìcDEBUG Ä£Ê½") - 2, this.height - 40, -1);
+        	this.drawString(this.fontRendererObj, "Â§cDEBUG æ¨¡å¼", this.width - this.fontRendererObj.getStringWidth("Â§cDEBUG æ¨¡å¼") - 2, this.height - 40, -1);
         }
         drawRect(0,0,800,12,0x80000000);
         SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String timestring = "¡ìe"+time.format(new Date());
+        String timestring = "Â§e"+time.format(new Date());
 		this.drawString(this.fontRendererObj, timestring, 1, 2, -1);
 		ConfigVar.announcement = this.Getannouncement();
 		if (ConfigVar.announcementmove == true)
@@ -688,13 +688,13 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
         int varinfoh = this.height / 4 + 48;
         drawAnnouncement();
         this.drawGradientRect(varinfow - 4, varinfoh, varinfow + 117, varinfoh + 70, 1610612736, 1610612736);
-        this.drawString(this.fontRendererObj, "¡ìe==========¹«¸æ==========", varinfow, varinfoh,
+        this.drawString(this.fontRendererObj, "Â§e==========å…¬å‘Š==========", varinfow, varinfoh,
                         16777215);
-        this.drawString(this.fontRendererObj, "¡ìe·şÎñÆ÷×´Ì¬: " + online, varinfow, varinfoh + 12, 16777215);
-        this.drawString(this.fontRendererObj, "¡ìeÔÚÏßÈËÊı: " + onlineplayer, varinfow, varinfoh + 24, 16777215);
-        this.drawString(this.fontRendererObj, "¡ìe×î´óÈËÊı: " + maxplayer, varinfow, varinfoh + 36, 16777215);
-        this.drawString(this.fontRendererObj, "¡ìeÓë·şÎñÆ÷ÑÓ³Ù: " + ping, varinfow, varinfoh + 48, 16777215);
-        this.drawString(this.fontRendererObj, "¡ìe×£ÄúÓÎÏ·Óä¿ì'_>'", varinfow, varinfoh + 60, 16777215);
+        this.drawString(this.fontRendererObj, "Â§eæœåŠ¡å™¨çŠ¶æ€: " + online, varinfow, varinfoh + 12, 16777215);
+        this.drawString(this.fontRendererObj, "Â§eåœ¨çº¿äººæ•°: " + onlineplayer, varinfow, varinfoh + 24, 16777215);
+        this.drawString(this.fontRendererObj, "Â§eæœ€å¤§äººæ•°: " + maxplayer, varinfow, varinfoh + 36, 16777215);
+        this.drawString(this.fontRendererObj, "Â§eä¸æœåŠ¡å™¨å»¶è¿Ÿ: " + ping, varinfow, varinfoh + 48, 16777215);
+        this.drawString(this.fontRendererObj, "Â§eç¥æ‚¨æ¸¸æˆæ„‰å¿«'_>'", varinfow, varinfoh + 60, 16777215);
         
         if (this.newVersionDetected != null && this.newVersionDetected.length() > 0)
         {
@@ -704,7 +704,7 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
             this.drawString(this.fontRendererObj, this.newVersionDetected, varinfow, this.rectDownload_u, -1);
             this.drawString(this.fontRendererObj, this.clickChangelog, varinfow, ((GuiButton)this.buttonList.get(0)).yPosition - 12, -1);
 
-            this.drawCenteredString(fontRendererObj, "¡ìe¡ìl[ ´ò¿ªÏÂÔØµØÖ· ]", this.width /2 + 52, this.rectDownload_u + rectHeight - 5, -1);
+            this.drawCenteredString(fontRendererObj, "Â§eÂ§l[ æ‰“å¼€ä¸‹è½½åœ°å€ ]", this.width /2 + 52, this.rectDownload_u + rectHeight - 5, -1);
             
         }
 
@@ -776,10 +776,10 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     public static String Getannouncement() {
     	if (!Menu.instance.jsonString.equals(null)){
 			JSONObject jsonobj1 = new JSONObject(Menu.instance.jsonString);
-			if(!getServerStatus()) return "¡ì4" + jsonobj1.getString("StatusText");
+			if(!getServerStatus()) return "Â§4" + jsonobj1.getString("StatusText");
 			return jsonobj1.getString("Announcement");
 		} else {
-			if(ConfigVar.onlinecheck) return "¡ì4ÍøÂç³ö´í";
+			if(ConfigVar.onlinecheck) return "Â§4ç½‘ç»œå‡ºé”™";
 			return ConfigVar.announcement;
 		}
     }

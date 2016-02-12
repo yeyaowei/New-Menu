@@ -28,7 +28,7 @@ public class Menu
 	{
 		Configuration config = new Configuration(e.getSuggestedConfigurationFile());
 		config.load();
-		//¶ÁÈ¡ÅäÖÃÎÄ¼ş
+		//è¯»å–é…ç½®æ–‡ä»¶
 		ConfigVar.onlinecheck = config.get("Online", "Check", false).getBoolean();
 		ConfigVar.version = config.get("Online", "Version", "v1.0").getString();
 		ConfigVar.url = config.get("Online", "url", "http://127.0.0.1/").getString();
@@ -41,7 +41,7 @@ public class Menu
 		ConfigVar.debug = config.get("General", "debugMode", false).getBoolean();
 		ConfigVar.ChangeLogFilename = config.get("Online", "ChangelogFilename", "NewMenuChangelog.txt").getString();
 		ConfigVar.JsonFilename = config.get("Online", "JsonFilename", "NewMenu.json").getString();
-		//½áÊø¶ÁÈ¡
+		//ç»“æŸè¯»å–
 		if(ConfigVar.onlinecheck)
 		{
 			this.changeLog = InternetUtil.LoadText(ConfigVar.url + "/" + ConfigVar.ChangeLogFilename);

@@ -33,7 +33,7 @@ public class GuiChangeLog extends GuiScreen {
 		this.changeLogList.clear();
 		this.buttonList.clear();
         this.buttonList.add(new GuiButton(0, this.width / 2 - 150, this.height - 30,300,20, I18n.format("gui.toMenu", new Object[0])));
-        /** 分割每一行的记录 */
+        /** 鍒嗗壊姣忎竴琛岀殑璁板綍 */
         String[] lineArray = changeLog.split("\n");
         for(String s : lineArray)
         {
@@ -46,7 +46,7 @@ public class GuiChangeLog extends GuiScreen {
 	{
 		this.drawDefaultBackground();
 		this.changeLogSlot.drawScreen(par1, par2, par3);
-        this.drawCenteredString(this.fontRendererObj, "更新日志", this.width / 2, this.height / 4 - 50, 16777215);
+        this.drawCenteredString(this.fontRendererObj, "鏇存柊鏃ュ織", this.width / 2, this.height / 4 - 50, 16777215);
         super.drawScreen(par1, par2, par3);
 	}
     protected void actionPerformed(GuiButton btnId)
