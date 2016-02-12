@@ -4,7 +4,6 @@ public class ConfigVar
 {
 	public static boolean onlinecheck;
 	public static boolean announcementmove;
-	public static boolean announcementcheck;
 	public static boolean IsTwoAddress;
 	public static String version;
 	public static String ServerAddress;
@@ -12,5 +11,7 @@ public class ConfigVar
 	public static String url;
 	public static String Captain;
 	public static String announcement;
+	public static String ChangeLogFilename;
+	public static String JsonFilename;
 	public static boolean debug;
 }

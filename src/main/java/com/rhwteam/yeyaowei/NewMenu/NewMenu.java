@@ -61,51 +61,38 @@ import com.google.common.util.concurrent.ThreadFactoryBuilder;
 public class NewMenu extends GuiScreen implements GuiYesNoCallback
 {
     private static final Logger logger = LogManager.getLogger();
-    /** The RNG used by the Main Menu Screen. */
     private static final Random rand = new Random();
-    /** Counts the number of screen updates. */
     private float updateCounter;
-    /** The splash message. */
     private String splashText;
     private GuiButton buttonResetDemo;
-    /** Timer used to rotate the panorama, increases every tick. */
     private int panoramaTimer;
-    /** Texture allocated for the current viewport of the main menu's panorama background. */
     private DynamicTexture viewportTexture;
-    private final Object field_104025_t = new Object();
-    private String field_92025_p;
-    private String field_146972_A;
-    private String field_104024_v;
+    private final Object rectDownload_t = new Object();
+    private String clickChangelog;
+    private String newVersionDetected;
     private static String downloadUrl;
     private static String newVersion;
     private static final ResourceLocation splashTexts = new ResourceLocation("texts/splashes.txt");
     private static final ResourceLocation minecraftTitleTextures = new ResourceLocation("textures/gui/title/minecraft.png");
-    /** An array of all the paths to the panorama pictures. */
     private static final ResourceLocation[] titlePanoramaPaths = new ResourceLocation[] {new ResourceLocation("textures/gui/title/background/panorama_0.png"), new ResourceLocation("textures/gui/title/background/panorama_1.png"), new ResourceLocation("textures/gui/title/background/panorama_2.png"), new ResourceLocation("textures/gui/title/background/panorama_3.png"), new ResourceLocation("textures/gui/title/background/panorama_4.png"), new ResourceLocation("textures/gui/title/background/panorama_5.png")};
-    public static final String field_96138_a = "Please click " + EnumChatFormatting.UNDERLINE + "here" + EnumChatFormatting.RESET + " for more information.";
-    //private int field_92024_r;
-    //private int field_92023_s;
-    //private int field_92022_t;
-    private int field_92021_u;
-    //private int field_92020_v;
-    private int field_92019_w;
+    private int rectDownload_u;
+    private int rectDownload_w;
     private ResourceLocation field_110351_G;
     private static final String __OBFID = "CL_00001154";
-    
     public static String maxplayer, onlineplayer;
     private static String online, ping;
     private static ServerData server = new ServerData("Server", ConfigVar.ServerAddress);
     private static ServerData server1 = new ServerData("Server1", ConfigVar.ServerAddress1);
     private final NewServerPinger oldServerPinger = new NewServerPinger();
-    private static String jsonString = HttpLoad.LoadText(ConfigVar.url + "/update.json");
-	private static String changeLog = HttpLoad.LoadText(ConfigVar.url + "/changelog2.txt");
+
+    
+    
     private GuiButton btns;
     private GuiButton btns1;
     private static final ThreadPoolExecutor field_148302_b = new ScheduledThreadPoolExecutor(5, (new ThreadFactoryBuilder()).setNameFormat("Server Pinger #%d").setDaemon(true).build());
 
     public NewMenu()
     {
-        this.field_146972_A = field_96138_a;
         this.splashText = "missingno";
         BufferedReader bufferedreader = null;
 
@@ -154,15 +141,6 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
         }
 
         this.updateCounter = rand.nextFloat();
-        this.field_92025_p = "";
-
-        /*if (!GLContext.getCapabilities().OpenGL20 && !OpenGlHelper.func_153193_b())
-        {
-            this.field_92025_p = I18n.format("title.oldgl1", new Object[0]);
-            this.field_146972_A = I18n.format("title.oldgl2", new Object[0]);
-            this.field_104024_v = "https://help.mojang.com/customer/portal/articles/325948?ref=game";
-        }*/
-        
         field_148302_b.submit(new Runnable()
     	{
     		private static final String __OBFID = "CL_00000818";
@@ -196,20 +174,16 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     }
 
     /**
-     * Returns true if this GUI should pause the game when it is displayed in single-player
+     * 当GUI需要暂停游戏时返回 true
      */
     public boolean doesGuiPauseGame()
     {
+    	//主界面怎么可能要暂停(⊙﹏⊙)b
         return false;
     }
 
     /**
-     * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
-     */
-    protected void keyTyped(char p_73869_1_, int p_73869_2_) {}
-
-    /**
-     * Adds the buttons (and other controls) to the screen in question.
+     * 初始化界面，添加按钮与其他要素.
      */
     public void initGui()
     {
@@ -254,23 +228,15 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, i + 72 + 12, 98, 20, I18n.format("menu.options", new Object[0])));
         this.buttonList.add(new GuiButton(4, this.width / 2 + 2, i + 72 + 12, 98, 20, I18n.format("menu.quit", new Object[0])));
         this.buttonList.add(new GuiButtonLanguage(20, this.width / 2 - 124, i + 72 + 12));
-        Object object = this.field_104025_t;
-
-        synchronized (this.field_104025_t)
+        synchronized (this.rectDownload_t)
         {
-            //this.field_92023_s = this.fontRendererObj.getStringWidth(this.field_92025_p);
-            //this.field_92024_r = this.fontRendererObj.getStringWidth(this.field_146972_A);
-            //int j = Math.max(this.field_92023_s, this.field_92024_r);
-            //this.field_92022_t = (this.width - j) / 2;
-            this.field_92021_u = ((GuiButton)this.buttonList.get(0)).yPosition - 24;
-            //this.field_92020_v = this.field_92022_t + j;
-            //this.field_92020_v = this.field_92024_r;
-            this.field_92019_w = this.field_92021_u + 24;
+            this.rectDownload_u = ((GuiButton)this.buttonList.get(0)).yPosition - 24;
+            this.rectDownload_w = this.rectDownload_u + 24;
         }
     }
 
     /**
-     * Adds Singleplayer and Multiplayer buttons on Main Menu for players who have bought the game.
+     * 添加按钮，检查更新
      */
     private void addSingleplayerMultiplayerButtons(int p_73969_1_, int p_73969_2_)
     {
@@ -279,17 +245,16 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     		this.buttonList.add(this.btns = new GuiButton(21, this.width / 2 + 2, p_73969_1_, 98, 20,I18n.format("服务器入口I", new Object[0])));
     		this.buttonList.add(this.btns1 = new GuiButton(22, this.width / 2 + 2, p_73969_1_ + p_73969_2_ * 1, 98, 20,I18n.format("服务器入口II", new Object[0])));
         	this.buttonList.add(new GuiButton(1, this.width / 2 + 2, p_73969_1_ + p_73969_2_ * 2, 98, 20, I18n.format("单人游戏", new Object[0])));
-        	if (isOutdate() && ConfigVar.onlinecheck)
+        	if (isOutdate())
             {
-                this.field_92025_p = I18n.format("§e§l检测到新版本 §b§l" + newVersion, new Object[0]);
-                this.field_146972_A = I18n.format("§a§l点击此处查看更新记录", new Object[0]);
-                this.field_104024_v = downloadUrl;
+                this.newVersionDetected = I18n.format("§e§l检测到新版本 §b§l" + newVersion, new Object[0]);
+                this.clickChangelog = I18n.format("§a§l点击此处查看更新记录", new Object[0]);
                 this.btns.enabled = false;
                 this.btns1.enabled = false;
                 this.btns.displayString = "客户端版本过期";
                 this.btns1.displayString = "客户端版本过期";
             }
-        	else if(!getServerStatus() && ConfigVar.onlinecheck)
+        	else if(!getServerStatus())
         	{
                 this.btns.enabled = false;
                 this.btns1.enabled = false;
@@ -302,15 +267,14 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     	{
     		this.buttonList.add(this.btns = new GuiButton(21, this.width / 2 + 2, p_73969_1_, 98, 20,I18n.format("进入服务器", new Object[0])));
         	this.buttonList.add(new GuiButton(1, this.width / 2 + 2, p_73969_1_ + p_73969_2_ * 1, 98, 20, I18n.format("单人游戏", new Object[0])));
-        	if (isOutdate() && ConfigVar.onlinecheck)
+        	if (isOutdate())
             {
-                this.field_92025_p = I18n.format("§e§l检测到新版本 §b§l" + newVersion, new Object[0]);
-                this.field_146972_A = I18n.format("§a§l点击此处查看更新记录", new Object[0]);
-                this.field_104024_v = downloadUrl;
+                this.newVersionDetected = I18n.format("§e§l检测到新版本 §b§l" + newVersion, new Object[0]);
+                this.clickChangelog = I18n.format("§a§l点击此处查看更新记录", new Object[0]);
                 this.btns.enabled = false;
                 this.btns.displayString = "客户端版本过期";
             }
-        	else if(!getServerStatus() && ConfigVar.onlinecheck)
+        	else if(!getServerStatus())
         	{
                 this.btns.enabled = false;
                 this.btns.displayString = "服务器维护中";
@@ -329,7 +293,7 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     }
 
     /**
-     * Adds Demo buttons on Main Menu for players who are playing Demo.
+     * 添加演示按钮(未使用
      */
     private void addDemoButtons(int p_73972_1_, int p_73972_2_)
     {
@@ -464,7 +428,7 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
                 {
                     Class oclass = Class.forName("java.awt.Desktop");
                     Object object = oclass.getMethod("getDesktop", new Class[0]).invoke((Object)null, new Object[0]);
-                    oclass.getMethod("browse", new Class[] {URI.class}).invoke(object, new Object[] {new URI(this.field_104024_v)});
+                    oclass.getMethod("browse", new Class[] {URI.class}).invoke(object, new Object[] {new URI(this.downloadUrl)});
                 }
                 catch (Throwable throwable)
                 {
@@ -477,7 +441,7 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     }
 
     /**
-     * Draws the main menu panorama
+     * 绘制游戏背景全景图
      */
     private void drawPanorama(int p_73970_1_, int p_73970_2_, float p_73970_3_)
     {
@@ -566,7 +530,7 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     }
 
     /**
-     * Rotate and blurs the skybox view in the main menu
+     * 使skybox旋转模糊
      */
     private void rotateAndBlurSkybox(float p_73968_1_)
     {
@@ -600,7 +564,7 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     }
 
     /**
-     * Renders the skybox in the main menu
+     * 渲染skybox
      */
     private void renderSkybox(int p_73971_1_, int p_73971_2_, float p_73971_3_)
     {
@@ -643,7 +607,7 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     public static int Alocation = 0;
     
     /**
-     * Draws the screen and all the components in it.
+     * 绘制屏幕与所有元素.
      */
     public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
@@ -712,11 +676,7 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
         SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String timestring = "§e"+time.format(new Date());
 		this.drawString(this.fontRendererObj, timestring, 1, 2, -1);
-
-		if (ConfigVar.announcementcheck == true)
-		{
-			ConfigVar.announcement = this.Getannouncement();
-		}
+		ConfigVar.announcement = this.Getannouncement();
 		if (ConfigVar.announcementmove == true)
 		{
 			AMove am = new AMove(this.width);
@@ -736,17 +696,15 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
         this.drawString(this.fontRendererObj, "§e与服务器延迟: " + ping, varinfow, varinfoh + 48, 16777215);
         this.drawString(this.fontRendererObj, "§e祝您游戏愉快'_>'", varinfow, varinfoh + 60, 16777215);
         
-        if (this.field_92025_p != null && this.field_92025_p.length() > 0)
+        if (this.newVersionDetected != null && this.newVersionDetected.length() > 0)
         {
-        	//this.field_92022_t - 2
-            drawRect(varinfow - 4, this.field_92021_u - 2, varinfow + 117, this.field_92019_w - 1, 1428160512);
-            drawRect(this.width /2 + 2, this.field_92021_u -2, this.width / 2 + 100, this.field_92019_w - 1, 1428160512);
-            int rectHeight = (this.field_92019_w - this.field_92021_u) / 2;
-            this.drawString(this.fontRendererObj, this.field_92025_p, varinfow, this.field_92021_u, -1);
-            //(this.width - this.field_92024_r) / 2
-            this.drawString(this.fontRendererObj, this.field_146972_A, varinfow, ((GuiButton)this.buttonList.get(0)).yPosition - 12, -1);
+            drawRect(varinfow - 4, this.rectDownload_u - 2, varinfow + 117, this.rectDownload_w - 1, 1428160512);
+            drawRect(this.width /2 + 2, this.rectDownload_u -2, this.width / 2 + 100, this.rectDownload_w - 1, 1428160512);
+            int rectHeight = (this.rectDownload_w - this.rectDownload_u) / 2;
+            this.drawString(this.fontRendererObj, this.newVersionDetected, varinfow, this.rectDownload_u, -1);
+            this.drawString(this.fontRendererObj, this.clickChangelog, varinfow, ((GuiButton)this.buttonList.get(0)).yPosition - 12, -1);
 
-            this.drawCenteredString(fontRendererObj, "§e§l[ 打开下载地址 ]", this.width /2 + 52, this.field_92021_u + rectHeight - 5, -1);
+            this.drawCenteredString(fontRendererObj, "§e§l[ 打开下载地址 ]", this.width /2 + 52, this.rectDownload_u + rectHeight - 5, -1);
             
         }
 
@@ -759,22 +717,22 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     protected void mouseClicked(int p_73864_1_, int p_73864_2_, int p_73864_3_)
     {
         super.mouseClicked(p_73864_1_, p_73864_2_, p_73864_3_);
-        Object object = this.field_104025_t;
+        Object object = this.rectDownload_t;
 
-        synchronized (this.field_104025_t)
+        synchronized (this.rectDownload_t)
         {
         	int varinfow = this.width / 2 - 119;
-            if (this.field_92025_p.length() > 0 && p_73864_1_ >= this.width /2 + 2 && p_73864_1_ <= this.width / 2 + 100 && p_73864_2_ >= this.field_92021_u && p_73864_2_ <= this.field_92019_w)
+            if (this.newVersionDetected.length() > 0 && p_73864_1_ >= this.width /2 + 2 && p_73864_1_ <= this.width / 2 + 100 && p_73864_2_ >= this.rectDownload_u && p_73864_2_ <= this.rectDownload_w)
             {
-                GuiConfirmOpenLink guiconfirmopenlink = new GuiConfirmOpenLink(this, this.field_104024_v, 13, true);
+                GuiConfirmOpenLink guiconfirmopenlink = new GuiConfirmOpenLink(this, this.downloadUrl, 13, true);
                 guiconfirmopenlink.func_146358_g();
                 this.mc.displayGuiScreen(guiconfirmopenlink);
             }
-            if (this.field_92025_p.length() > 0 && p_73864_1_ >= varinfow && p_73864_1_ <= varinfow + 117 && p_73864_2_ >= this.field_92021_u && p_73864_2_ <= this.field_92019_w)
+            if (this.newVersionDetected.length() > 0 && p_73864_1_ >= varinfow && p_73864_1_ <= varinfow + 117 && p_73864_2_ >= this.rectDownload_u && p_73864_2_ <= this.rectDownload_w)
             {
-            	if(!changeLog.equalsIgnoreCase("offline"))
+            	if(!Menu.instance.changeLog.equals(null))
             	{
-                	GuiChangeLog guichangelog = new GuiChangeLog(this, changeLog);
+                	GuiChangeLog guichangelog = new GuiChangeLog(this, Menu.instance.changeLog);
                     this.mc.displayGuiScreen(guichangelog);
             	}
 
@@ -788,27 +746,21 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     }
     public static boolean getServerStatus()
     {
-    	if(!jsonString.equalsIgnoreCase("Offline"))
+    	if(!Menu.instance.jsonString.equals(null))
     	{
-			JSONObject jsonobj = new JSONObject(jsonString);
+			JSONObject jsonobj = new JSONObject(Menu.instance.jsonString);
 			boolean status = jsonobj.getBoolean("OK");
-			if(!status)
-			{
-				return false;
-			}
+			if(!status) return false;
 			return true;
     	}
     	return true;
     }   
     public static boolean isOutdate() {
-		if (!jsonString.equalsIgnoreCase("offline")) {
-			JSONObject jsonobj = new JSONObject(jsonString);
+		if (!Menu.instance.jsonString.equals(null)) {
+			JSONObject jsonobj = new JSONObject(Menu.instance.jsonString);
 			String newversion = jsonobj.getString("Version");
 			String downloadurl = jsonobj.getString("DownloadURL");
-			if(ConfigVar.debug)
-			{
-				newversion = "DEBUG";
-			}
+			if(ConfigVar.debug) newversion = "DEBUG";
 			if (!newversion.equalsIgnoreCase(ConfigVar.version)) {
 				downloadUrl = downloadurl;
 				newVersion = newversion;
@@ -822,18 +774,13 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
 		}
 	}
     public static String Getannouncement() {
-    	if (!jsonString.equalsIgnoreCase("offline")){
-			JSONObject jsonobj1 = new JSONObject(jsonString);
-			if(!getServerStatus())
-			{
-				return "§4" + jsonobj1.getString("StatusText");
-			}
-			else
-			{
-				return jsonobj1.getString("Announcement");
-			}
+    	if (!Menu.instance.jsonString.equals(null)){
+			JSONObject jsonobj1 = new JSONObject(Menu.instance.jsonString);
+			if(!getServerStatus()) return "§4" + jsonobj1.getString("StatusText");
+			return jsonobj1.getString("Announcement");
 		} else {
-			return "§4网络出错";
+			if(ConfigVar.onlinecheck) return "§4网络出错";
+			return ConfigVar.announcement;
 		}
     }
 }
@@ -845,10 +792,7 @@ class AMove extends Thread
 		try 
 		{
 	        Thread.sleep(25);
-	        if (NewMenu.Alocation >= width)
-	        {
-	        	NewMenu.Alocation = 0;
-	        }
+	        if (NewMenu.Alocation >= width) NewMenu.Alocation = 0;
 	        NewMenu.Alocation++;
 		} catch (InterruptedException e){
 	        e.printStackTrace();
