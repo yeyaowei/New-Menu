@@ -37,7 +37,6 @@ public class HttpLoad {
 				return "offline";
 			}
 		    String buf = contentBuf.toString();
-		    System.out.println(buf);
 			return buf;
 		}
 		return "offline";

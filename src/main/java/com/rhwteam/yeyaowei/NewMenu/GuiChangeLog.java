@@ -33,13 +33,12 @@ public class GuiChangeLog extends GuiScreen {
 		this.changeLogList.clear();
 		this.buttonList.clear();
         this.buttonList.add(new GuiButton(0, this.width / 2 - 150, this.height - 30,300,20, I18n.format("gui.toMenu", new Object[0])));
-        String[] pageArray = changeLog.split("\n");
-        //int i = 0;
-        for(String s : pageArray)
+        /** 分割每一行的记录 */
+        String[] lineArray = changeLog.split("\n");
+        for(String s : lineArray)
         {
+        	
         	changeLogList.add(s);
-        	//i += 10;
-        	//this.drawString(this.fontRendererObj, "§a§l" + s, this.width / 2 - 160, this.height / 4 - 25 + i, 16777215);
         }
         this.changeLogSlot = new GuiChangeLog.List();
 	}

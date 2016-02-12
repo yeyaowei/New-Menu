@@ -25,14 +25,14 @@ public class Menu
 		Configuration config = new Configuration(e.getSuggestedConfigurationFile());
 		config.load();
 		//读取配置文件
-		ConfigVar.onlinecheck = config.get("Online", "Check", true).getBoolean();
-		ConfigVar.version = config.get("Online", "Version", "v4.0").getString();
-		ConfigVar.announcementcheck = config.get("Online", "zAnnouncementCheck", true).getBoolean();
-		ConfigVar.url = "http://www.rhw-team.com/SimpleCloud/Files/";
+		ConfigVar.onlinecheck = config.get("Online", "Check", false).getBoolean();
+		ConfigVar.version = config.get("Online", "Version", "v1.0").getString();
+		ConfigVar.announcementcheck = config.get("Online", "zAnnouncementCheck", false).getBoolean();
+		ConfigVar.url = config.get("Online", "url", "http://127.0.0.1/").getString();
 		ConfigVar.IsTwoAddress = config.get("Server", "1sTwoAddress", false).getBoolean();
-		ConfigVar.ServerAddress = config.get("Server", "Address1", "f1.suteidc.com:26966").getString();
-		ConfigVar.ServerAddress1 = config.get("Server", "Address2", "f1.suteidc.com:26966").getString();
-		ConfigVar.Captain = config.get("Server", "Captain", "羁绊服务器客户端 " + ConfigVar.version).getString();
+		ConfigVar.ServerAddress = config.get("Server", "Address1", "127.0.0.1").getString();
+		ConfigVar.ServerAddress1 = config.get("Server", "Address2", "127.0.0.1").getString();
+		ConfigVar.Captain = config.get("Server", "Captain", "Minecraft 1.7.10").getString();
 		ConfigVar.announcement = config.get("Server", "Announcement", "").getString();
 		ConfigVar.announcementmove = config.get("Server", "AnnouncementMove", false).getBoolean();
 		ConfigVar.debug = config.get("General", "debugMode", false).getBoolean();
