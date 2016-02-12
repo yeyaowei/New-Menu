@@ -1,0 +1,16 @@
+[
+{
+  "modid": "NewMenu",
+  "name": "New Menu",
+  "description": "Change Your Minecraft Menu (for Friendship Server)",
+  "version": "1.2",
+  "mcversion": "1.7.10",
+  "url": "http://www.rhw-team.com/",
+  "updateUrl": "",
+  "authorList": ["BakaSea(SPE_HaiKuo)","R9 Nano(yeyaowei)"],
+  "credits": "Hello",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
