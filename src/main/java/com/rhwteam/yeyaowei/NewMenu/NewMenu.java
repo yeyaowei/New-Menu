@@ -84,9 +84,6 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     private static ServerData server = new ServerData("Server", ConfigVar.ServerAddress);
     private static ServerData server1 = new ServerData("Server1", ConfigVar.ServerAddress1);
     private final NewServerPinger oldServerPinger = new NewServerPinger();
-
-    
-    
     private GuiButton btns;
     private GuiButton btns1;
     private static final ThreadPoolExecutor field_148302_b = new ScheduledThreadPoolExecutor(5, (new ThreadFactoryBuilder()).setNameFormat("Server Pinger #%d").setDaemon(true).build());
@@ -153,12 +150,12 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     			catch (UnknownHostException unknownhostexception)
     			{
     				NewMenu.this.server.pingToServer = -1L;
-    				NewMenu.this.server.serverMOTD = "§4§l网络错误";
+    				NewMenu.this.server.serverMOTD = "§c§l网络错误";
     			}
     			catch (Exception exception)
     			{
     				NewMenu.this.server.pingToServer = -1L;
-    				NewMenu.this.server.serverMOTD = "§4§l网络错误";
+    				NewMenu.this.server.serverMOTD = "§c§l网络错误";
     			}
     		}
     	});
@@ -671,13 +668,13 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
         synchronized (this.rectDownload_t)
         {
         	int varinfow = this.width / 2 - 119;
-            if (this.newVersionDetected.length() > 0 && p_73864_1_ >= this.width /2 + 2 && p_73864_1_ <= this.width / 2 + 100 && p_73864_2_ >= this.rectDownload_u && p_73864_2_ <= this.rectDownload_w)
+            if (this.newVersionDetected != null && this.newVersionDetected.length() > 0 && p_73864_1_ >= this.width /2 + 2 && p_73864_1_ <= this.width / 2 + 100 && p_73864_2_ >= this.rectDownload_u && p_73864_2_ <= this.rectDownload_w)
             {
                 GuiConfirmOpenLink guiconfirmopenlink = new GuiConfirmOpenLink(this, this.downloadUrl, 13, true);
                 guiconfirmopenlink.func_146358_g();
                 this.mc.displayGuiScreen(guiconfirmopenlink);
             }
-            if (this.newVersionDetected.length() > 0 && p_73864_1_ >= varinfow && p_73864_1_ <= varinfow + 117 && p_73864_2_ >= this.rectDownload_u && p_73864_2_ <= this.rectDownload_w)
+            if (this.newVersionDetected != null && this.newVersionDetected.length() > 0 && p_73864_1_ >= varinfow && p_73864_1_ <= varinfow + 117 && p_73864_2_ >= this.rectDownload_u && p_73864_2_ <= this.rectDownload_w)
             {
             	if(!Menu.instance.changeLog.equals(null))
             	{
@@ -725,10 +722,10 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     public static String getAnnouncement() {
     	if (!Menu.instance.jsonString.equals(null)){
 			JSONObject jsonobj1 = new JSONObject(Menu.instance.jsonString);
-			if(!getServerStatus()) return "§4" + jsonobj1.getString("StatusText");
+			if(!getServerStatus()) return "§c" + jsonobj1.getString("StatusText");
 			return jsonobj1.getString("Announcement");
 		} else {
-			if(ConfigVar.onlinecheck) return "§4网络出错";
+			if(ConfigVar.onlinecheck) return "§c网络出错";
 			return ConfigVar.announcement;
 		}
     }

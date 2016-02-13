@@ -15,7 +15,7 @@ import net.minecraft.util.Session;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 
-@Mod(modid = "NewMenu", name = "New Menu", version = "v1.3.1")
+@Mod(modid = "NewMenu", name = "New Menu", version = "v1.3.2")
 public class Menu
 {
 	static String changeLog = "offline";
