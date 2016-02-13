@@ -75,7 +75,6 @@ public class NewServerPinger
 
                 if (serverstatusresponse.func_151317_a() != null)
                 {
-                    //p_147224_1_.serverMOTD = serverstatusresponse.func_151317_a().getFormattedText();
                 	p_147224_1_.serverMOTD = "§a§l在线";
                 }
                 else

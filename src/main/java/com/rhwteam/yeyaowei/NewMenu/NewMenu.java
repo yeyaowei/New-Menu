@@ -164,27 +164,17 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
     	});
         FMLClientHandler.instance().setupServerList();
     }
-
-    /**
-     * Called from the main game loop to update the screen.
-     */
     public void updateScreen()
     {
         ++this.panoramaTimer;
     }
 
-    /**
-     * 当GUI需要暂停游戏时返回 true
-     */
     public boolean doesGuiPauseGame()
     {
     	//主界面怎么可能要暂停(⊙﹏⊙)b
         return false;
     }
 
-    /**
-     * 初始化界面，添加按钮与其他要素.
-     */
     public void initGui()
     {
         this.viewportTexture = new DynamicTexture(256, 256);
@@ -235,9 +225,6 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
         }
     }
 
-    /**
-     * 添加按钮，检查更新
-     */
     private void addSingleplayerMultiplayerButtons(int p_73969_1_, int p_73969_2_)
     {
     	if (ConfigVar.IsTwoAddress)
@@ -261,7 +248,6 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
                 this.btns.displayString = "服务器维护中";
                 this.btns1.displayString = "服务器维护中";
         	}
-        	//this.buttonList.add(new GuiButton(6, this.width / 2 + 2, p_73969_1_ + p_73969_2_ * 2, 98, 20, I18n.format("Mods", new Object[0])));
     	}
     	else
     	{
@@ -281,20 +267,8 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
         	}
         	this.buttonList.add(new GuiButton(6, this.width / 2 + 2, p_73969_1_ + p_73969_2_ * 2, 98, 20, I18n.format("Mods", new Object[0])));
     	}
-        /*this.buttonList.add(new GuiButton(1, this.width / 2 - 100, p_73969_1_, I18n.format("menu.singleplayer", new Object[0])));
-        this.buttonList.add(new GuiButton(2, this.width / 2 - 100, p_73969_1_ + p_73969_2_ * 1, I18n.format("menu.multiplayer", new Object[0])));
-        GuiButton realmsButton = new GuiButton(14, this.width / 2 - 100, p_73969_1_ + p_73969_2_ * 2, I18n.format("menu.online", new Object[0]));
-        GuiButton fmlModButton = new GuiButton(6, this.width / 2 - 100, p_73969_1_ + p_73969_2_ * 2, "Mods");
-        fmlModButton.xPosition = this.width / 2 + 2;
-        realmsButton.width = 98;
-        fmlModButton.width = 98;
-        this.buttonList.add(realmsButton);
-        this.buttonList.add(fmlModButton);*/
     }
 
-    /**
-     * 添加演示按钮(未使用
-     */
     private void addDemoButtons(int p_73972_1_, int p_73972_2_)
     {
         this.buttonList.add(new GuiButton(11, this.width / 2 - 100, p_73972_1_, I18n.format("menu.playdemo", new Object[0])));
@@ -393,14 +367,12 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
         {
         	FMLClientHandler.instance().setupServerList();
         	FMLClientHandler.instance().connectToServer(this, server);
-        	//this.mc.displayGuiScreen(new GuiConnecting(this, this.mc, server));
         }
         
         if (p_146284_1_.id == 22)
         {
         	FMLClientHandler.instance().setupServerList();
         	FMLClientHandler.instance().connectToServer(this, server1);
-        	//this.mc.displayGuiScreen(new GuiConnecting(this, this.mc, server1));
         }
         
     }
@@ -440,9 +412,6 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
         }
     }
 
-    /**
-     * 绘制游戏背景全景图
-     */
     private void drawPanorama(int p_73970_1_, int p_73970_2_, float p_73970_3_)
     {
         Tessellator tessellator = Tessellator.instance;
@@ -529,9 +498,6 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
         GL11.glEnable(GL11.GL_DEPTH_TEST);
     }
 
-    /**
-     * 使skybox旋转模糊
-     */
     private void rotateAndBlurSkybox(float p_73968_1_)
     {
         this.mc.getTextureManager().bindTexture(this.field_110351_G);
@@ -563,9 +529,6 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
         GL11.glColorMask(true, true, true, true);
     }
 
-    /**
-     * 渲染skybox
-     */
     private void renderSkybox(int p_73971_1_, int p_73971_2_, float p_73971_3_)
     {
         this.mc.getFramebuffer().unbindFramebuffer();
@@ -603,12 +566,6 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
 			ping = "§4§l0";
 		}
 	}
-    
-    public static int Alocation = 0;
-    
-    /**
-     * 绘制屏幕与所有元素.
-     */
     public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
     {
         GL11.glDisable(GL11.GL_ALPHA_TEST);
@@ -663,7 +620,7 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
                 this.drawString(this.fontRendererObj, brd, 2, this.height - ( 10 + i * (this.fontRendererObj.FONT_HEIGHT + 1)), 16777215);
             }
         }
-        //ForgeHooksClient.renderMainMenu(this, fontRendererObj, width, height);
+
         String s1 = "§bMojang AB.版权所有";
         this.drawString(this.fontRendererObj, s1, this.width - this.fontRendererObj.getStringWidth(s1) - 2, this.height - 10, -1);
         this.drawString(this.fontRendererObj, "§e§lUI制作 BakaSea(SPE_HaiKuo)", this.width - this.fontRendererObj.getStringWidth("§e§lUI制作 BakaSea(SPE_HaiKuo)") - 2, this.height - 20, -1);
@@ -676,14 +633,8 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
         SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String timestring = "§e"+time.format(new Date());
 		this.drawString(this.fontRendererObj, timestring, 1, 2, -1);
-		ConfigVar.announcement = this.Getannouncement();
-		if (ConfigVar.announcementmove == true)
-		{
-			AMove am = new AMove(this.width);
-			am.start();
-			this.drawString(this.fontRendererObj, ConfigVar.announcement, this.Alocation, 2, -1);
-		} else {this.drawString(this.fontRendererObj, ConfigVar.announcement, (this.width / 2 - ConfigVar.announcement.length() * 2), 2, -1);}
-		
+		ConfigVar.announcement = this.getAnnouncement();
+		this.drawString(this.fontRendererObj, ConfigVar.announcement, (this.width / 2 - ConfigVar.announcement.length() * 2), 2, -1);
 		int varinfow = this.width / 2 - 119;
         int varinfoh = this.height / 4 + 48;
         drawAnnouncement();
@@ -711,9 +662,7 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
         super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
     }
 
-    /**
-     * Called when the mouse is clicked.
-     */
+
     protected void mouseClicked(int p_73864_1_, int p_73864_2_, int p_73864_3_)
     {
         super.mouseClicked(p_73864_1_, p_73864_2_, p_73864_3_);
@@ -773,7 +722,7 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
 			return false;
 		}
 	}
-    public static String Getannouncement() {
+    public static String getAnnouncement() {
     	if (!Menu.instance.jsonString.equals(null)){
 			JSONObject jsonobj1 = new JSONObject(Menu.instance.jsonString);
 			if(!getServerStatus()) return "§4" + jsonobj1.getString("StatusText");
@@ -783,19 +732,4 @@ public class NewMenu extends GuiScreen implements GuiYesNoCallback
 			return ConfigVar.announcement;
 		}
     }
-}
-
-class AMove extends Thread
-{
-	public AMove(int width) 
-	{
-		try 
-		{
-	        Thread.sleep(25);
-	        if (NewMenu.Alocation >= width) NewMenu.Alocation = 0;
-	        NewMenu.Alocation++;
-		} catch (InterruptedException e){
-	        e.printStackTrace();
-		}
-	}
 }

@@ -15,7 +15,7 @@ import net.minecraft.util.Session;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 
-@Mod(modid = "NewMenu", name = "New Menu", version = "v1.3")
+@Mod(modid = "NewMenu", name = "New Menu", version = "v1.3.1")
 public class Menu
 {
 	static String changeLog = "offline";
@@ -41,13 +41,14 @@ public class Menu
 		ConfigVar.debug = config.get("General", "debugMode", false).getBoolean();
 		ConfigVar.ChangeLogFilename = config.get("Online", "ChangelogFilename", "NewMenuChangelog.txt").getString();
 		ConfigVar.JsonFilename = config.get("Online", "JsonFilename", "NewMenu.json").getString();
+		config.save();
 		//结束读取
 		if(ConfigVar.onlinecheck)
 		{
 			this.changeLog = InternetUtil.LoadText(ConfigVar.url + "/" + ConfigVar.ChangeLogFilename);
 			this.jsonString = InternetUtil.LoadText(ConfigVar.url + "/" + ConfigVar.JsonFilename);
 		}
-		config.save();
+
 		Display.setTitle(ConfigVar.Captain);
 		MinecraftForge.EVENT_BUS.register(NewMenuHandler.instance);
 	}

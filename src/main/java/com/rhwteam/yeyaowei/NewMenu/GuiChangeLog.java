@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.Level;
 
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptionButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -13,7 +15,7 @@ import net.minecraft.client.gui.GuiSnooper;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.I18n;
-
+@SideOnly(Side.CLIENT)
 public class GuiChangeLog extends GuiScreen {
 	private GuiScreen parentScreen;
 	private String changeLog;
@@ -60,37 +62,21 @@ public class GuiChangeLog extends GuiScreen {
     {
     	public List()
     	{
-    		super(GuiChangeLog.this.mc, GuiChangeLog.this.width, GuiChangeLog.this.height, 30, GuiChangeLog.this.height - 45, GuiChangeLog.this.fontRendererObj.FONT_HEIGHT - 1);
+    		super(GuiChangeLog.this.mc, GuiChangeLog.this.width, GuiChangeLog.this.height, 30, GuiChangeLog.this.height - 45, GuiChangeLog.this.fontRendererObj.FONT_HEIGHT + 3);
     	}
 
 		@Override
 		protected int getSize() {
-			// TODO Auto-generated method stub
 			return GuiChangeLog.this.changeLogList.size();
 		}
-
-		@Override
-		protected void elementClicked(int p_148144_1_, boolean p_148144_2_, int p_148144_3_, int p_148144_4_) {
-			// TODO Auto-generated method stub
-			
-		}
-
 		@Override
 		protected boolean isSelected(int p_148131_1_) {
-			// TODO Auto-generated method stub
 			return false;
-		}
-
-		@Override
-		protected void drawBackground() {
-			// TODO Auto-generated method stub
-			
 		}
 
 		@Override
 		protected void drawSlot(int p_148126_1_, int p_148126_2_, int p_148126_3_, int p_148126_4_,
 				Tessellator p_148126_5_, int p_148126_6_, int p_148126_7_) {
-			// TODO Auto-generated method stub
             GuiChangeLog.this.fontRendererObj.drawString((String)GuiChangeLog.this.changeLogList.get(p_148126_1_), 10, p_148126_3_, 16777215);
 			
 		}
@@ -98,5 +84,19 @@ public class GuiChangeLog extends GuiScreen {
         {
             return this.width - 10;
         }
+        protected int getContentHeight()
+        {
+            return this.getSize() * this.slotHeight + this.headerPadding + 5;
+        }
+
+		@Override
+		protected void elementClicked(int p_148144_1_, boolean p_148144_2_, int p_148144_3_, int p_148144_4_) {
+			
+		}
+
+		@Override
+		protected void drawBackground() {
+			
+		}
     }
 }
